@@ -170,12 +170,12 @@
         window.onload = function() {
             // Your web app's Firebase configuration
             const firebaseConfig = {
-                apiKey: "AIzaSyDcItjK2ZVCH-QqhjyOrh8FCfjqrqC63EM",
-                authDomain: "sing-a-song-6f6df.firebaseapp.com",
-                projectId: "sing-a-song-6f6df",
-                storageBucket: "sing-a-song-6f6df.appspot.com",
-                messagingSenderId: "701648987527",
-                appId: "1:701648987527:web:db7cc710226d44b3ed9f22"
+                apiKey: "AIzaSyDU_9f8mWWP6GHcJzW0BnzsmYUCvIBXooU",
+                authDomain: "sing-a-song-c80f1.firebaseapp.com",
+                projectId: "sing-a-song-c80f1",
+                storageBucket: "sing-a-song-c80f1.firebasestorage.app",
+                messagingSenderId: "542681033418",
+                appId: "1:542681033418:web:6bc5b42bb4e8ecca456233"
             };
 
             try {
@@ -206,7 +206,7 @@
             document.getElementById('sessionIdDisplay').textContent = sessionId;
             document.getElementById('sessionIdContainer').classList.remove('hidden');
             const userId = auth.currentUser?.uid || 'anonymous';
-            const appId = "sing-a-song-6f6df"; // New App ID for this test
+            const appId = "sing-a-song-c80f1"; 
             
             const timezoneOffset = new Date().getTimezoneOffset();
             
@@ -224,8 +224,7 @@
         }
 
         function listenForCommands() {
-            const appId = "sing-a-song-6f6df";
-            // FIXED: Corrected database path to conform to security rules
+            const appId = "sing-a-song-c80f1";
             const sessionRef = doc(db, `artifacts/${appId}/public/data/sessions`, sessionId);
             onSnapshot(sessionRef, (doc) => {
                 const data = doc.data();
@@ -255,9 +254,8 @@
 
         function updateGameState(newState) {
             gameState = { ...gameState, ...newState };
-            const appId = gameState.appId || 'sing-a-song-6f6df';
+            const appId = gameState.appId || 'sing-a-song-c80f1';
             if (db && sessionId) {
-                // FIXED: Corrected database path to conform to security rules
                 const sessionRef = doc(db, `artifacts/${appId}/public/data/sessions`, sessionId);
                 setDoc(sessionRef, { 
                     ...gameState,
@@ -360,4 +358,3 @@
     </script>
 </body>
 </html>
-
