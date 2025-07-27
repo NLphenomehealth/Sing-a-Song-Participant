@@ -21,6 +21,12 @@
             max-width: 48rem;
             margin: 1rem auto;
         }
+        .stress-option.selected {
+            background-color: #e0e7ff; /* indigo-200 */
+            border-color: #6366f1; /* indigo-500 */
+            font-weight: 600;
+            box-shadow: 0 0 0 2px #818cf8; /* indigo-400 */
+        }
     </style>
 </head>
 <body class="bg-gray-100 flex items-center justify-center min-h-screen p-4">
@@ -43,18 +49,17 @@
             <div id="preBaselineSurvey" class="screen hidden">
                 <div class="max-w-4xl mx-auto text-left space-y-4">
                     <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Log Your Stress Level</h2>
-                    <p>Please open the <strong>MyT1Diabetes</strong> app and open the <strong>I’ve Noticed</strong> feature.</p>
-                    <p>Select ‘Write a note’, tap the text box and enter: <code class="bg-gray-200 text-red-600 p-1 rounded">Stress 0=[your response to the survey below]</code>. After you’ve entered your response, please select ‘Confirm’.</p>
+                    <p>Please select your current stress level from the options below. Your selection will be shared with the researcher.</p>
                     <div class="my-4 p-4 border rounded-lg bg-gray-50">
                         <p class="font-bold">What is your current stress level?</p>
-                        <ul class="list-none space-y-1 mt-2">
-                            <li>○ 😰 Very stressed</li>
-                            <li>○ 😨 Stressed</li>
-                            <li>○ 😥 Somewhat stressed</li>
-                            <li>○ 😶 Neutral</li>
-                            <li>○ 😌 Not stressed at all</li>
-                            <li>○ ⚪️ No answer</li>
-                        </ul>
+                        <div class="stress-option-group mt-2 space-y-2" data-survey-type="pre">
+                            <div class="stress-option p-3 border rounded-lg cursor-pointer hover:bg-indigo-50 flex items-center gap-3 transition-all" data-value="Very stressed">😰 Very stressed</div>
+                            <div class="stress-option p-3 border rounded-lg cursor-pointer hover:bg-indigo-50 flex items-center gap-3 transition-all" data-value="Stressed">😨 Stressed</div>
+                            <div class="stress-option p-3 border rounded-lg cursor-pointer hover:bg-indigo-50 flex items-center gap-3 transition-all" data-value="Somewhat stressed">😥 Somewhat stressed</div>
+                            <div class="stress-option p-3 border rounded-lg cursor-pointer hover:bg-indigo-50 flex items-center gap-3 transition-all" data-value="Neutral">😶 Neutral</div>
+                            <div class="stress-option p-3 border rounded-lg cursor-pointer hover:bg-indigo-50 flex items-center gap-3 transition-all" data-value="Not stressed at all">😌 Not stressed at all</div>
+                            <div class="stress-option p-3 border rounded-lg cursor-pointer hover:bg-indigo-50 flex items-center gap-3 transition-all" data-value="No answer">⚪️ No answer</div>
+                        </div>
                     </div>
                     <p class="text-center font-semibold text-indigo-600 mt-4">Waiting for the researcher to continue...</p>
                 </div>
@@ -103,18 +108,17 @@
             <div id="postTaskSurvey" class="screen hidden">
                  <div class="max-w-4xl mx-auto text-left space-y-4">
                     <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Log Your Stress Level</h2>
-                    <p>Please open the <strong>MyT1Diabetes</strong> app and open the <strong>I’ve Noticed</strong> feature.</p>
-                    <p>Select ‘Write a note’, tap the text box and enter: <code class="bg-gray-200 text-red-600 p-1 rounded">Stress 1=[your response to the survey below]</code>. After you’ve entered your response, please select ‘Confirm’.</p>
+                    <p>Please select your current stress level from the options below. Your selection will be shared with the researcher.</p>
                     <div class="my-4 p-4 border rounded-lg bg-gray-50">
                         <p class="font-bold">What is your current stress level?</p>
-                        <ul class="list-none space-y-1 mt-2">
-                            <li>○ 😰 Very stressed</li>
-                            <li>○ 😨 Stressed</li>
-                            <li>○ 😥 Somewhat stressed</li>
-                            <li>○ 😶 Neutral</li>
-                            <li>○ 😌 Not stressed at all</li>
-                            <li>○ ⚪️ No answer</li>
-                        </ul>
+                        <div class="stress-option-group mt-2 space-y-2" data-survey-type="post">
+                            <div class="stress-option p-3 border rounded-lg cursor-pointer hover:bg-indigo-50 flex items-center gap-3 transition-all" data-value="Very stressed">😰 Very stressed</div>
+                            <div class="stress-option p-3 border rounded-lg cursor-pointer hover:bg-indigo-50 flex items-center gap-3 transition-all" data-value="Stressed">😨 Stressed</div>
+                            <div class="stress-option p-3 border rounded-lg cursor-pointer hover:bg-indigo-50 flex items-center gap-3 transition-all" data-value="Somewhat stressed">😥 Somewhat stressed</div>
+                            <div class="stress-option p-3 border rounded-lg cursor-pointer hover:bg-indigo-50 flex items-center gap-3 transition-all" data-value="Neutral">😶 Neutral</div>
+                            <div class="stress-option p-3 border rounded-lg cursor-pointer hover:bg-indigo-50 flex items-center gap-3 transition-all" data-value="Not stressed at all">😌 Not stressed at all</div>
+                            <div class="stress-option p-3 border rounded-lg cursor-pointer hover:bg-indigo-50 flex items-center gap-3 transition-all" data-value="No answer">⚪️ No answer</div>
+                        </div>
                     </div>
                     <p class="text-center font-semibold text-indigo-600 mt-4">Waiting for the researcher to continue...</p>
                 </div>
@@ -169,27 +173,14 @@
             'meal': { timerId: 'mealTimer', duration: 300 },
         };
 
-        function initializeContent() {
-             allConfigs = {
-                'silentReading': { taskContent: { title: 'Read the following passage Silently', passageTitle: 'Vacuum Cleaner', passageBody: 'A vacuum cleaner, also known simply as a vacuum, is a device that uses suction-often with agitation-to remove dirt and debris from carpets, hard floors, and other surfaces. The dirt is collected into a dust bag or plastic bin. Vacuum cleaners come in many forms, including stick, handheld, upright, canister, and specialized shop vacuums that can handle both solids and liquids.\n\nAlthough vacuum cleaner and vacuum are neutral terms, in some countries (e.g., the UK and Ireland) hoover is used generically (and as a verb) after the Hoover Company, one of the earliest producers of the device. In parts of New Zealand it\'s sometimes called a lux. The term sweeper may also be used, though it can refer specifically to a carpet sweeper.\n\nThe first manual vacuum designs using bellows appeared in the 1860s; motorized versions followed at the turn of the 20th century, leading to rapid innovation during that decade.'}},
-                'readAloud1_content': { taskContent: { title: 'Read the following passage Aloud', passageTitle: 'Paper Clip', passageBody: 'A paper clip (or paperclip) is a small steel-wire device (sometimes plastic-coated) bent into loops that hold sheets of paper together by torsion and friction. Most modern clips are based on the Gem type introduced in the 1890s, characterized by one-and-a-half loops.\n\nPaper clips have an oblong shape with straight sides, though triangular, circular, and novelty shapes exist. Alternatives include two-piece clamping systems and spring-fastened binder clips. Their simplicity and versatility have made them ubiquitous in offices, schools, and creative projects. A typical metal paper clip weighs about one gram.'}},
-                'readAloud2_content': { taskContent: { title: 'Read the following passage Aloud', passageTitle: 'Wood', passageBody: 'Wood is the structural xylem tissue in the stems and roots of trees and other woody plants-a composite of cellulose fibers (strong under tension) embedded in lignin (resistant to compression). In living trees it provides support and transports water and nutrients.\n\nHumans have used wood for millennia as fuel, construction material, and for tools, weapons, furniture, paper, and, more recently, purified cellulose products such as cellophane. As of 2020, global forest growing stock totaled roughly 557 billion m³, with nearly 4 billion m³ harvested annually (dominantly for construction and furniture). Wood science has been an established field since the early 20th century.'}},
-                'challengeInstructions': { taskContent: { title: 'Read the following Challenge instructions Aloud', passageTitle: '', passageBody: 'You will now prepare for a singing challenge. Your performance will be recorded and evaluated by a music professional. Songs you may be asked to sing are listed below. If you finish a song before the time ends. Start over from the beginning until the timer reaches 00:00.\n\nOnce you see the screen with lyrics to the song, begin singing!\n\nSong list:\n• I\'m a Little Teapot\n• Twinkle, Twinkle, Little Star\n• Mary Had a Little Lamb'}},
-                'singASong1_content': { taskContent: { title: 'Sing the following song Aloud', passageTitle: 'I\'m a Little Teapot', passageBody: 'Verse 1\nI\'m a little teapot, short and stout. Here is my handle, here is my spout. When the water\'s boiling, hear me shout: "Tip me over, pour me out!"\n\nVerse 2\nI\'m a little teapot, short and stout. Here is my handle, here is my spout. I can change my handle or my spout-"Tip me over, pour me out!"\n\nVerse 3\nI\'m a little teapot, short and stout. Here is my handle, here is my spout. When the water\'s boiling, hear me shout: "Tip me over, pour me out!"\n\nVerse 4\nI\'m a little teapot, short and stout. Here is my handle, here is my spout. I can change my handle or my spout - "Tip me over, pour me out!"'}},
-                'singASong2_content': { taskContent: { title: 'Sing the following song Aloud', passageTitle: 'Twinkle, Twinkle, Little Star', passageBody: 'Twinkle, twinkle, little star, How I wonder what you are!\n\nUp above the world so high, Like a diamond in the sky.\n\n\nWhen the blazing sun is set, And the grass with dew is wet,\n\nThen you show your little light-Twinkle, twinkle, all the night.\n\n\nThen the traveler in the dark. Thanks you for your tiny spark;\n\nHe could not see which way to go. If you did not twinkle so.\n\n\nAs your bright and tiny spark. Lights the traveler in the dark-\n\nThough I know not what you are, Twinkle, twinkle, little star.'}},
-                'singASong3_content': { taskContent: { title: 'Sing the following song Aloud', passageTitle: 'Mary Had a Little Lamb', passageBody: 'Verse 1:\nMary had a little lamb, little lamb, little lamb; Mary had a little lamb, its fleece was white as snow.\n\nVerse 2:\nAnd everywhere that Mary went, Mary went, Mary went; and everywhere that Mary went, the lamb was sure to go.\n\nVerse 3:\nIt followed her to school one day, school one day, school one day; it followed her to school one day, which was against the rule.\n\nVerse 4:\nIt made the children laugh and play, laugh and play, laugh and play; it made the children laugh and play to see the lamb at school.\n\nVerse 5:\nAnd so the teacher sent it out, sent it out, sent it out; and so the teacher sent it out, but still it lingered near.\n\nVerse 6:\nIt stood and waited round about, round about, round about; it stood and waited round about, till Mary did appear.\n\nVerse 7:\n"Why does the lamb love Mary so?" the little children cry.'}}
-            };
-        }
-
         window.onload = function() {
-            initializeContent();
             const firebaseConfig = {
                 apiKey: "AIzaSyDU_9f8mWWP6GHcJzW0BnzsmYUCvIBXooU",
                 authDomain: "sing-a-song-c80f1.firebaseapp.com",
                 projectId: "sing-a-song-c80f1",
                 storageBucket: "sing-a-song-c80f1.firebasestorage.app",
                 messagingSenderId: "542681033418",
-                appId: "1:542681033418:web:6bc5b4e8ecca456233"
+                appId: "1:542681033418:web:6bc5b42bb4e8ecca456233"
             };
 
             try {
@@ -244,12 +235,37 @@
                 appId: appId,
                 timezoneOffset: timezoneOffset,
                 timer: { running: false, value: '0:00' },
-                taskContent: {}
+                taskContent: {},
+                stressResponsePre: null,
+                stressResponsePost: null
             };
             updateGameState(gameState);
             listenForCommands();
+            setupInteractiveSurveys();
             startHeartbeat();
         }
+
+        function setupInteractiveSurveys() {
+            document.querySelectorAll('.stress-option-group').forEach(group => {
+                group.addEventListener('click', (event) => {
+                    const selectedOption = event.target.closest('.stress-option');
+                    if (!selectedOption) return;
+
+                    group.querySelectorAll('.stress-option').forEach(opt => opt.classList.remove('selected'));
+                    selectedOption.classList.add('selected');
+
+                    const surveyType = group.dataset.surveyType;
+                    const value = selectedOption.dataset.value;
+
+                    if (surveyType === 'pre') {
+                        updateGameState({ stressResponsePre: value });
+                    } else if (surveyType === 'post') {
+                        updateGameState({ stressResponsePost: value });
+                    }
+                });
+            });
+        }
+
 
         function listenForCommands() {
             const appId = "sing-a-song-c80f1";
@@ -296,7 +312,6 @@
         function showScreen(screenId, taskContent = {}) {
             stopMainTimer();
 
-            // FIX: Clear previous dynamic content to prevent duplicate element IDs
             ['silentReading', 'readAloud', 'challengeInstructions', 'singASong'].forEach(id => {
                 const el = document.getElementById(id);
                 if (el) el.innerHTML = ''; 
